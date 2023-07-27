@@ -19,6 +19,10 @@ const MODEL_PATHS = {
   "ja": "models/ja",
   "en": "models/en"
 }
+const LANG_MAP = {
+  "ja": "Japanese",
+  "en": "English"
+}
 
 configLogger();
 const logger = getLogger("Main");
@@ -63,12 +67,7 @@ client.on(Events.ClientReady, () => {
               type: ApplicationCommandOptionType.String,
               name: "language",
               description: "Language to transcribe. default to ja",
-              choices: [
-                {
-                  name: "Japanese",
-                  value: "ja"
-                }
-              ]
+              choices: Object.keys(LANG_MAP).map((key) => ({ name: LANG_MAP[key], value: key }))
             }
           ]
         },
@@ -210,7 +209,7 @@ client.on(Events.InteractionCreate, async (i) => {
   process.on(signal, () => {
     logger.info(`Received ${signal}. Exiting`);
     client.destroy();
-    model.free();
+    Object.values(models).forEach(model => model.free());
     process.exit(0);
   });
 });
