@@ -30,7 +30,7 @@ if (!fs.existsSync(MODEL_PATHS["ja"]) && !fs.existsSync(MODEL_PATHS["en"])) {
 
 logger.info("Loading model...");
 const models = {
-  ja: new vosk.Model(MODEL_PATH)
+  ja: new vosk.Model(MODEL_PATHS)
 }
 logger.info("Model loaded");
 
