@@ -55,6 +55,8 @@ for (const file of slashCommandFiles) {
 
 /** @type {Map<string, { createdAt: Date, userId: string, content: string }[]} */
 client.minutes = new Map();
+/** @type {Map<string, Set<string>>} */
+client.speaking = new Map();
 
 ["SIGINT", "SIGTERM"].forEach((signal) => {
   process.on(signal, () => {
