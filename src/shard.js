@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { ShardingManager } = require("discord.js");
 const configLogger = require("./logger");
 const { getLogger } = require("log4js");
