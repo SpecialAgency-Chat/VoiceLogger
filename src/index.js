@@ -7,7 +7,7 @@ const vosk = require("vosk");
 const fs = require("node:fs");
 const configLogger = require("./logger");
 const { getLogger } = require("log4js");
-const config = require("../config.json");
+const config = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
 const MODEL_PATHS = config.modelPaths;
 
 configLogger();
@@ -36,7 +36,7 @@ logger.info("Model loaded");
 
 const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
 for (const file of eventFiles) {
-  const event = require(`./src/events/${file}`);
+  const event = require(`./events/${file}`);
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
@@ -49,8 +49,8 @@ client.commands = new Map();
 const slashCommandFiles = fs.readdirSync("./src/commands");
 
 for (const file of slashCommandFiles) {
-  const command = require(`./src/commands/${file}`);
-  client.slash.set(command.name, command);
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
 }
 
 /** @type {Map<string, { createdAt: Date, userId: string, content: string }[]} */

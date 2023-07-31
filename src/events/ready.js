@@ -3,7 +3,7 @@ const { getLogger } = require("log4js");
 const { generateDependencyReport } = require("@discordjs/voice");
 const logger = getLogger("Ready");
 
-const config = require("../config.json");
+const config = require("../../config.json");
 const MODEL_PATHS = config.modelPaths;
 const LANG_MAP = config.langMap;
 const defaultLang = config.defaultLang;
