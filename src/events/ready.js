@@ -39,6 +39,10 @@ module.exports = {
             description: "Stop transcribing"
           }
         ]
+      },
+      {
+        name: "ping",
+        description: "Ping pong"
       }
     ]);
   }
