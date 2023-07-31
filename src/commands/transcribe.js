@@ -35,7 +35,6 @@ module.exports = {
       if (!talkedData) return interaction.reply({ ephemeral: true, content: "I'm not transcribing" });
       await interaction.deferReply();
       let result = talkedData.filter(data => data.content.trim() !== "");
-      console.log(result);
       // 結合する
       result = result.reduce((arr, item) => {
         let previousItem = arr[arr.length - 1];
@@ -46,7 +45,6 @@ module.exports = {
         }
         return arr;
       }, []);
-      console.log(result);
       result = result.map((data) => {
         const user = interaction.guild.members.cache.get(data.userId);
         return `${user?.displayName || "Unknown"} (${data.userId}): ${data.content}`;
