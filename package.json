@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run clean && node index.js",
+    "start": "npm run clean && node src/index.js",
     "clean": "rimraf --glob ./tmp/*.wav # no longer needed"
   },
   "keywords": [],
