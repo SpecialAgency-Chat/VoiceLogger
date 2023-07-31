@@ -33,6 +33,8 @@ module.exports = {
       logger.trace("Stop command");
       const talkedData = client.minutes.get(interaction.guild.id);
       if (!talkedData) return interaction.reply({ ephemeral: true, content: "I'm not transcribing" });
+      const spk = client.speaking.get(interaction.guild.id);
+      if (spk && spk.size > 0) return interaction.reply({ ephemeral: true, content: "I'm still transcribing" });
       await interaction.deferReply();
       let result = talkedData.filter(data => data.content.trim() !== "");
       // 結合する
@@ -75,6 +77,9 @@ module.exports = {
     receiver.speaking.on("start", async (userId) => {
       if (userId === client.user.id) return;
       logger.trace(`Speaking start: ${userId}`);
+      const spk = client.speaking.get(guild.id) || new Set();
+      spk.add(userId);
+      client.speaking.set(guild.id, spk);
       const audioStream = connection.receiver.subscribe(userId, {
         end: {
           behavior: EndBehaviorType.AfterSilence,
@@ -94,6 +99,10 @@ module.exports = {
         logger.trace(result);
         const talkedData = client.minutes.get(guild.id) || [];
         talkedData.push({ createdAt: new Date(), userId, content: result });
+        /** @type {Set<string>} */
+        const spk = client.speaking.get(guild.id) || new Set();
+        spk.delete(userId);
+        client.speaking.set(guild.id, spk);
         client.minutes.set(guild.id, talkedData);
       });
     });
