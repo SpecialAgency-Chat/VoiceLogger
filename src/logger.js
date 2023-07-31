@@ -1,6 +1,9 @@
 const log4js = require("log4js");
 
+let configured = false;
+
 module.exports = function configLogger() {
+  if (configured) return;
   log4js.configure({
     appenders: {
       console: {
@@ -24,4 +27,5 @@ module.exports = function configLogger() {
       },
     },
   });
+  configured = true;
 }

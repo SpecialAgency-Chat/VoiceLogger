@@ -1,0 +1,11 @@
+{
+  "modelPaths": {
+    "en": "models/en",
+    "ja": "models/ja"
+  },
+  "langMap": {
+    "en": "English",
+    "ja": "日本語"
+  },
+  "defaultLang": "ja"
+}

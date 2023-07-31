@@ -1,0 +1,7 @@
+models
+model_small
+logs
+node_modules
+tmp
+README.md
+.env

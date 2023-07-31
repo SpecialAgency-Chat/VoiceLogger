@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run clean && node index.js",
+    "start": "node src/shard.js",
     "clean": "rimraf --glob ./tmp/*.wav # no longer needed"
   },
   "keywords": [],
@@ -25,6 +25,8 @@
     "wav-converter": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.46.0",
+    "prettier": "^3.0.0",
     "rimraf": "^5.0.1"
   }
 }
