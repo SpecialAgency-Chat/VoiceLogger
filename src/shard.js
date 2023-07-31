@@ -4,7 +4,7 @@ const { getLogger } = require("log4js");
 configLogger();
 const logger = getLogger("ShardingManager");
 const manager = new ShardingManager("./src/index.js", {
-  token: process.env.TOKEN,
+  token: process.env.DISCORD_TOKEN,
 });
 
 manager.on("shardCreate", (shard) => {
