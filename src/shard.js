@@ -3,7 +3,7 @@ const configLogger = require("./logger");
 const { getLogger } = require("log4js");
 configLogger();
 const logger = getLogger("ShardingManager");
-const manager = new ShardingManager("./index.js", {
+const manager = new ShardingManager("./src/index.js", {
   token: process.env.TOKEN,
 });
 
