@@ -1,4 +1,4 @@
-const { entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus, NoSubscriberBehavior, getVoiceConnection } = require("@discordjs/voice");
+const { entersState, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus, NoSubscriberBehavior, getVoiceConnection } = require("@discordjs/voice");
 
 module.exports = function playRecordingSound(guildId) {
   const connection = getVoiceConnection(guildId);
