@@ -23,12 +23,16 @@ module.exports = {
         await command.execute(interaction);
       } catch (error) {
         logger.error(error);
-        if (interaction.deferred) {
-          await interaction.editReply({ content: "An error occured while executing this command!", ephemeral: true });
-        } else if (interaction.replied) {
-          await interaction.followUp({ content: "An error occured while executing this command!", ephemeral: true });
-        } else {
-          await interaction.reply({ content: "An error occured while executing this command!", ephemeral: true });
+        try {
+          if (interaction.deferred) {
+            await interaction.editReply({ content: "An error occured while executing this command!", ephemeral: true });
+          } else if (interaction.replied) {
+            await interaction.followUp({ content: "An error occured while executing this command!", ephemeral: true });
+          } else {
+            await interaction.reply({ content: "An error occured while executing this command!", ephemeral: true });
+          }
+        } catch (error) {
+          logger.error(error);
         }
       }
     }
