@@ -15,27 +15,28 @@ const FFmpeg = require('fluent-ffmpeg');
 const wav = require("wav");
 const configLogger = require("./logger");
 const { getLogger } = require("log4js");
-const MODEL_PATHS = {
-  "ja": "models/ja",
-  "en": "models/en"
-}
-const LANG_MAP = {
-  "ja": "Japanese",
-  "en": "English"
-}
+const config = require("../config.json");
+const MODEL_PATHS = config.modelPaths;
+const LANG_MAP = config.langMap;
 
 configLogger();
 const logger = getLogger("Main");
 
 if (!fs.existsSync(MODEL_PATHS["ja"]) && !fs.existsSync(MODEL_PATHS["en"])) {
-  logger.fatal("Please download the model from https://alphacephei.com/vosk/models and unpack as " + MODEL_PATH + " in the current folder.")
+  logger.fatal("Please download the model from https://alphacephei.com/vosk/models and unpack as " + MODEL_PATH + " in the current folder.");
   process.exit()
 }
 
 logger.info("Loading model...");
+/*
 const models = {
   ja: new vosk.Model(MODEL_PATHS["ja"])
-}
+}*/
+const models = Object.keys(MODEL_PATHS).reduce((obj, key) => {
+  obj[key] = new vosk.Model(MODEL_PATHS[key]);
+  return obj;
+}, {});
+
 logger.info("Model loaded");
 
 class OpusDecodingStream extends Transform {
