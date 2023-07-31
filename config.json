@@ -6,5 +6,6 @@
   "langMap": {
     "en": "English",
     "ja": "日本語"
-  }
+  },
+  "defaultLang": "ja"
 }
